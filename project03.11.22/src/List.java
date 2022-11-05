@@ -44,9 +44,10 @@ public class List<Item>{
     void print(){
         ListItem<Item>li=first;
         while(li!=null){
-            System.out.println(li.getData());
+            System.out.print(li.getData()+" ");
             li=li.getNext();
         }
+        System.out.println();
     }
     public void remove(int i){
         if(i<=kol){
@@ -61,5 +62,48 @@ public class List<Item>{
                 first=next;
         }
         kol--;
+    }
+    boolean simm(){
+        ListItem<Item>li1=first;
+        ListItem<Item>li2=last;
+        while(li1.getNext()!=null && li2.getPrev()!=null)
+            if(li1.getData()!= li2.getData())
+                return false;
+        else
+            {
+                li1=li1.getNext();
+                li2=li2.getPrev();
+            }
+        return true;
+    }
+    public void removelast(Item data){
+        ListItem<Item>li=last;
+        int f=0;
+        int i=0;
+        while(f==0)
+        {
+            if(li.getData()==data){
+                remove(kol-i);
+                f=1;
+            }
+            else{
+                i++;
+                li=li.getPrev();
+            }
+        }
+    }
+    boolean equalelem(){
+        ListItem<Item>li1=first;
+        ListItem<Item>li2=li1.getNext();
+        while(li1.getNext()!=null){
+            while(li2.getNext()!=null){
+                if(li1.getData()== li2.getData())
+                    return true;
+                else li2=li2.getNext();
+            }
+            li1=li1.getNext();
+            li2=li1.getNext();
+        }
+        return false;
     }
 }
